@@ -1,0 +1,534 @@
+Intel(R) Advisor can now assist with vectorization and show optimization
+  report messages with your source code.
+See "https://software.intel.com/en-us/intel-advisor-xe" for details.
+
+Intel(R) Fortran Intel(R) 64 Compiler for applications running on Intel(R) 64, Version 18.0.3.222 Build 20180410
+
+Compiler options: -c -qopenmp -xhost -qopt-report=5 -qopt-report-file=worker.o.optrpt -o worker.o
+
+    Report from: Interprocedural optimizations [ipo]
+
+  WHOLE PROGRAM (SAFE) [EITHER METHOD]: false
+  WHOLE PROGRAM (SEEN) [TABLE METHOD]: false
+  WHOLE PROGRAM (READ) [OBJECT READER METHOD]: false
+
+INLINING OPTION VALUES:
+  -inline-factor: 100
+  -inline-min-size: 30
+  -inline-max-size: 230
+  -inline-max-total-size: 2000
+  -inline-max-per-routine: 10000
+  -inline-max-per-compile: 500000
+
+In the inlining report below:
+   "sz" refers to the "size" of the routine. The smaller a routine's size,
+      the more likely it is to be inlined.
+   "isz" refers to the "inlined size" of the routine. This is the amount
+      the calling routine will grow if the called routine is inlined into it.
+      The compiler generally limits the amount a routine can grow by having
+      routines inlined into it.
+
+Begin optimization report for: worker_module._
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (worker_module._) [1/7=14.3%] worker.f90(1,8)
+
+
+    Report from: Code generation optimizations [cg]
+
+worker.f90(1,8):remark #34051: REGISTER ALLOCATION : [worker_module._] worker.f90:1
+
+    Hardware registers
+        Reserved     :    2[ rsp rip]
+        Available    :   39[ rax rdx rcx rbx rbp rsi rdi r8-r15 mm0-mm7 zmm0-zmm15]
+        Callee-save  :    6[ rbx rbp r12-r15]
+        Assigned     :    0[ reg_null]
+        
+    Routine temporaries
+        Total         :       6
+            Global    :       0
+            Local     :       6
+        Regenerable   :       0
+        Spilled       :       0
+        
+    Routine stack
+        Variables     :       0 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       0 [0.00e+00 ~ 0.0%]
+        Spills        :       0 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       0 [0.00e+00 ~ 0.0%]
+    
+    Notes
+    
+        *Non-overlapping variables and spills may share stack space,
+         so the total stack size might be less than this.
+    
+
+===========================================================================
+
+Begin optimization report for: WORKER_MODULE::MY_VECTOR_ADD
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (WORKER_MODULE::MY_VECTOR_ADD) [2/7=28.6%] worker.f90(5,14)
+
+
+    Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
+
+
+LOOP BEGIN at worker.f90(11,5)
+<Peeled loop for vectorization>
+   remark #25015: Estimate of max trip count of loop=3
+LOOP END
+
+LOOP BEGIN at worker.f90(11,5)
+   remark #15388: vectorization support: reference a(i) has aligned access   [ worker.f90(12,8) ]
+   remark #15388: vectorization support: reference a(i) has aligned access   [ worker.f90(12,15) ]
+   remark #15389: vectorization support: reference b(i) has unaligned access   [ worker.f90(12,22) ]
+   remark #15381: vectorization support: unaligned access used inside loop body
+   remark #15305: vectorization support: vector length 4
+   remark #15399: vectorization support: unroll factor set to 4
+   remark #15309: vectorization support: normalized vectorization overhead 0.295
+   remark #15300: LOOP WAS VECTORIZED
+   remark #15442: entire loop may be executed in remainder
+   remark #15448: unmasked aligned unit stride loads: 1 
+   remark #15449: unmasked aligned unit stride stores: 1 
+   remark #15450: unmasked unaligned unit stride loads: 1 
+   remark #15475: --- begin vector cost summary ---
+   remark #15476: scalar cost: 6 
+   remark #15477: vector cost: 2.750 
+   remark #15478: estimated potential speedup: 2.050 
+   remark #15488: --- end vector cost summary ---
+LOOP END
+
+LOOP BEGIN at worker.f90(11,5)
+<Remainder loop for vectorization>
+   remark #15388: vectorization support: reference a(i) has aligned access   [ worker.f90(12,8) ]
+   remark #15388: vectorization support: reference a(i) has aligned access   [ worker.f90(12,15) ]
+   remark #15389: vectorization support: reference b(i) has unaligned access   [ worker.f90(12,22) ]
+   remark #15381: vectorization support: unaligned access used inside loop body
+   remark #15305: vectorization support: vector length 4
+   remark #15309: vectorization support: normalized vectorization overhead 1.182
+   remark #15301: REMAINDER LOOP WAS VECTORIZED
+LOOP END
+
+LOOP BEGIN at worker.f90(11,5)
+<Remainder loop for vectorization>
+LOOP END
+
+    Report from: Code generation optimizations [cg]
+
+worker.f90(5,14):remark #34051: REGISTER ALLOCATION : [worker_module_mp_my_vector_add_] worker.f90:5
+
+    Hardware registers
+        Reserved     :    2[ rsp rip]
+        Available    :   39[ rax rdx rcx rbx rbp rsi rdi r8-r15 mm0-mm7 zmm0-zmm15]
+        Callee-save  :    6[ rbx rbp r12-r15]
+        Assigned     :   20[ rax rdx rcx rsi rdi r8-r10 zmm0-zmm11]
+        
+    Routine temporaries
+        Total         :      61
+            Global    :      22
+            Local     :      39
+        Regenerable   :       1
+        Spilled       :       0
+        
+    Routine stack
+        Variables     :       0 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       0 [0.00e+00 ~ 0.0%]
+        Spills        :       0 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       0 [0.00e+00 ~ 0.0%]
+    
+    Notes
+    
+        *Non-overlapping variables and spills may share stack space,
+         so the total stack size might be less than this.
+    
+
+===========================================================================
+
+Begin optimization report for: WORKER_MODULE::MY_VECTOR_ADD_ASSUMED
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (WORKER_MODULE::MY_VECTOR_ADD_ASSUMED) [3/7=42.9%] worker.f90(17,14)
+
+
+    Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
+
+
+LOOP BEGIN at worker.f90(23,5)
+<Peeled loop for vectorization, Multiversioned v1>
+   remark #25015: Estimate of max trip count of loop=3
+LOOP END
+
+LOOP BEGIN at worker.f90(23,5)
+<Multiversioned v1>
+   remark #25233: Loop multiversioned for stride tests on Assumed shape arrays
+   remark #15388: vectorization support: reference a(i) has aligned access   [ worker.f90(24,8) ]
+   remark #15388: vectorization support: reference a(i) has aligned access   [ worker.f90(24,15) ]
+   remark #15389: vectorization support: reference b(i) has unaligned access   [ worker.f90(24,22) ]
+   remark #15381: vectorization support: unaligned access used inside loop body
+   remark #15305: vectorization support: vector length 4
+   remark #15399: vectorization support: unroll factor set to 4
+   remark #15309: vectorization support: normalized vectorization overhead 0.295
+   remark #15300: LOOP WAS VECTORIZED
+   remark #15442: entire loop may be executed in remainder
+   remark #15448: unmasked aligned unit stride loads: 1 
+   remark #15449: unmasked aligned unit stride stores: 1 
+   remark #15450: unmasked unaligned unit stride loads: 1 
+   remark #15475: --- begin vector cost summary ---
+   remark #15476: scalar cost: 6 
+   remark #15477: vector cost: 2.750 
+   remark #15478: estimated potential speedup: 2.050 
+   remark #15488: --- end vector cost summary ---
+LOOP END
+
+LOOP BEGIN at worker.f90(23,5)
+<Remainder loop for vectorization, Multiversioned v1>
+   remark #15388: vectorization support: reference a(i) has aligned access   [ worker.f90(24,8) ]
+   remark #15388: vectorization support: reference a(i) has aligned access   [ worker.f90(24,15) ]
+   remark #15389: vectorization support: reference b(i) has unaligned access   [ worker.f90(24,22) ]
+   remark #15381: vectorization support: unaligned access used inside loop body
+   remark #15305: vectorization support: vector length 4
+   remark #15309: vectorization support: normalized vectorization overhead 1.182
+   remark #15301: REMAINDER LOOP WAS VECTORIZED
+LOOP END
+
+LOOP BEGIN at worker.f90(23,5)
+<Remainder loop for vectorization, Multiversioned v1>
+LOOP END
+
+LOOP BEGIN at worker.f90(23,5)
+<Multiversioned v2>
+   remark #15335: loop was not vectorized: vectorization possible but seems inefficient. Use vector always directive or -vec-threshold0 to override 
+   remark #15329: vectorization support: non-unit strided store was emulated for the variable <a(i)>, stride is unknown to compiler   [ worker.f90(24,8) ]
+   remark #15328: vectorization support: non-unit strided load was emulated for the variable <a(i)>, stride is unknown to compiler   [ worker.f90(24,15) ]
+   remark #15328: vectorization support: non-unit strided load was emulated for the variable <b(i)>, stride is unknown to compiler   [ worker.f90(24,22) ]
+   remark #15305: vectorization support: vector length 2
+   remark #15399: vectorization support: unroll factor set to 4
+   remark #15309: vectorization support: normalized vectorization overhead 0.083
+   remark #15452: unmasked strided loads: 2 
+   remark #15453: unmasked strided stores: 1 
+   remark #15475: --- begin vector cost summary ---
+   remark #15476: scalar cost: 6 
+   remark #15477: vector cost: 6.000 
+   remark #15478: estimated potential speedup: 0.990 
+   remark #15488: --- end vector cost summary ---
+   remark #25439: unrolled with remainder by 2  
+LOOP END
+
+LOOP BEGIN at worker.f90(23,5)
+<Remainder, Multiversioned v2>
+LOOP END
+
+    Report from: Code generation optimizations [cg]
+
+worker.f90(17,14):remark #34051: REGISTER ALLOCATION : [worker_module_mp_my_vector_add_assumed_] worker.f90:17
+
+    Hardware registers
+        Reserved     :    2[ rsp rip]
+        Available    :   39[ rax rdx rcx rbx rbp rsi rdi r8-r15 mm0-mm7 zmm0-zmm15]
+        Callee-save  :    6[ rbx rbp r12-r15]
+        Assigned     :   23[ rax rdx rcx rbx rsi rdi r8-r11 r15 zmm0-zmm11]
+        
+    Routine temporaries
+        Total         :      89
+            Global    :      37
+            Local     :      52
+        Regenerable   :       1
+        Spilled       :       2
+        
+    Routine stack
+        Variables     :       0 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       0 [0.00e+00 ~ 0.0%]
+        Spills        :       0 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       0 [0.00e+00 ~ 0.0%]
+    
+    Notes
+    
+        *Non-overlapping variables and spills may share stack space,
+         so the total stack size might be less than this.
+    
+
+===========================================================================
+
+Begin optimization report for: WORKER_MODULE::MY_VECTOR_ADD_ASSUMED_CONTIGUOUS
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (WORKER_MODULE::MY_VECTOR_ADD_ASSUMED_CONTIGUOUS) [4/7=57.1%] worker.f90(29,14)
+
+
+    Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
+
+
+LOOP BEGIN at worker.f90(35,5)
+<Peeled loop for vectorization>
+   remark #25015: Estimate of max trip count of loop=3
+LOOP END
+
+LOOP BEGIN at worker.f90(35,5)
+   remark #15388: vectorization support: reference a(i) has aligned access   [ worker.f90(36,8) ]
+   remark #15388: vectorization support: reference a(i) has aligned access   [ worker.f90(36,15) ]
+   remark #15389: vectorization support: reference b(i) has unaligned access   [ worker.f90(36,22) ]
+   remark #15381: vectorization support: unaligned access used inside loop body
+   remark #15305: vectorization support: vector length 4
+   remark #15399: vectorization support: unroll factor set to 4
+   remark #15309: vectorization support: normalized vectorization overhead 0.295
+   remark #15300: LOOP WAS VECTORIZED
+   remark #15442: entire loop may be executed in remainder
+   remark #15448: unmasked aligned unit stride loads: 1 
+   remark #15449: unmasked aligned unit stride stores: 1 
+   remark #15450: unmasked unaligned unit stride loads: 1 
+   remark #15475: --- begin vector cost summary ---
+   remark #15476: scalar cost: 6 
+   remark #15477: vector cost: 2.750 
+   remark #15478: estimated potential speedup: 2.050 
+   remark #15488: --- end vector cost summary ---
+LOOP END
+
+LOOP BEGIN at worker.f90(35,5)
+<Remainder loop for vectorization>
+   remark #15388: vectorization support: reference a(i) has aligned access   [ worker.f90(36,8) ]
+   remark #15388: vectorization support: reference a(i) has aligned access   [ worker.f90(36,15) ]
+   remark #15389: vectorization support: reference b(i) has unaligned access   [ worker.f90(36,22) ]
+   remark #15381: vectorization support: unaligned access used inside loop body
+   remark #15305: vectorization support: vector length 4
+   remark #15309: vectorization support: normalized vectorization overhead 1.182
+   remark #15301: REMAINDER LOOP WAS VECTORIZED
+LOOP END
+
+LOOP BEGIN at worker.f90(35,5)
+<Remainder loop for vectorization>
+LOOP END
+
+    Report from: Code generation optimizations [cg]
+
+worker.f90(29,14):remark #34051: REGISTER ALLOCATION : [worker_module_mp_my_vector_add_assumed_contiguous_] worker.f90:29
+
+    Hardware registers
+        Reserved     :    2[ rsp rip]
+        Available    :   39[ rax rdx rcx rbx rbp rsi rdi r8-r15 mm0-mm7 zmm0-zmm15]
+        Callee-save  :    6[ rbx rbp r12-r15]
+        Assigned     :   21[ rax rdx rcx rsi rdi r8-r11 zmm0-zmm11]
+        
+    Routine temporaries
+        Total         :      63
+            Global    :      25
+            Local     :      38
+        Regenerable   :       1
+        Spilled       :       0
+        
+    Routine stack
+        Variables     :       0 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       0 [0.00e+00 ~ 0.0%]
+        Spills        :       0 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       0 [0.00e+00 ~ 0.0%]
+    
+    Notes
+    
+        *Non-overlapping variables and spills may share stack space,
+         so the total stack size might be less than this.
+    
+
+===========================================================================
+
+Begin optimization report for: WORKER_MODULE::MY_VECTOR_ADD_ALLOCATABLE
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (WORKER_MODULE::MY_VECTOR_ADD_ALLOCATABLE) [5/7=71.4%] worker.f90(41,14)
+
+
+    Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
+
+
+LOOP BEGIN at worker.f90(47,5)
+<Peeled loop for vectorization>
+   remark #25015: Estimate of max trip count of loop=3
+LOOP END
+
+LOOP BEGIN at worker.f90(47,5)
+   remark #15388: vectorization support: reference a(i) has aligned access   [ worker.f90(48,8) ]
+   remark #15388: vectorization support: reference a(i) has aligned access   [ worker.f90(48,15) ]
+   remark #15389: vectorization support: reference b(i) has unaligned access   [ worker.f90(48,22) ]
+   remark #15381: vectorization support: unaligned access used inside loop body
+   remark #15305: vectorization support: vector length 4
+   remark #15399: vectorization support: unroll factor set to 4
+   remark #15309: vectorization support: normalized vectorization overhead 0.295
+   remark #15300: LOOP WAS VECTORIZED
+   remark #15442: entire loop may be executed in remainder
+   remark #15448: unmasked aligned unit stride loads: 1 
+   remark #15449: unmasked aligned unit stride stores: 1 
+   remark #15450: unmasked unaligned unit stride loads: 1 
+   remark #15475: --- begin vector cost summary ---
+   remark #15476: scalar cost: 6 
+   remark #15477: vector cost: 2.750 
+   remark #15478: estimated potential speedup: 2.050 
+   remark #15488: --- end vector cost summary ---
+LOOP END
+
+LOOP BEGIN at worker.f90(47,5)
+<Remainder loop for vectorization>
+   remark #15388: vectorization support: reference a(i) has aligned access   [ worker.f90(48,8) ]
+   remark #15388: vectorization support: reference a(i) has aligned access   [ worker.f90(48,15) ]
+   remark #15389: vectorization support: reference b(i) has unaligned access   [ worker.f90(48,22) ]
+   remark #15381: vectorization support: unaligned access used inside loop body
+   remark #15305: vectorization support: vector length 4
+   remark #15309: vectorization support: normalized vectorization overhead 1.182
+   remark #15301: REMAINDER LOOP WAS VECTORIZED
+LOOP END
+
+LOOP BEGIN at worker.f90(47,5)
+<Remainder loop for vectorization>
+LOOP END
+
+    Report from: Code generation optimizations [cg]
+
+worker.f90(41,14):remark #34051: REGISTER ALLOCATION : [worker_module_mp_my_vector_add_allocatable_] worker.f90:41
+
+    Hardware registers
+        Reserved     :    2[ rsp rip]
+        Available    :   39[ rax rdx rcx rbx rbp rsi rdi r8-r15 mm0-mm7 zmm0-zmm15]
+        Callee-save  :    6[ rbx rbp r12-r15]
+        Assigned     :   24[ rax rdx rcx rbx rsi rdi r8-r11 r14-r15 zmm0-zmm11]
+        
+    Routine temporaries
+        Total         :      73
+            Global    :      29
+            Local     :      44
+        Regenerable   :       1
+        Spilled       :       3
+        
+    Routine stack
+        Variables     :       0 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       0 [0.00e+00 ~ 0.0%]
+        Spills        :       0 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       0 [0.00e+00 ~ 0.0%]
+    
+    Notes
+    
+        *Non-overlapping variables and spills may share stack space,
+         so the total stack size might be less than this.
+    
+
+===========================================================================
+
+Begin optimization report for: WORKER_MODULE::MY_VECTOR_ADD_POINTER
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (WORKER_MODULE::MY_VECTOR_ADD_POINTER) [6/7=85.7%] worker.f90(53,14)
+
+
+    Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
+
+
+LOOP BEGIN at worker.f90(59,5)
+   remark #15344: loop was not vectorized: vector dependence prevents vectorization
+   remark #15346: vector dependence: assumed FLOW dependence between a(i) (60:8) and b%e8%e8(0) (60:8)
+   remark #15346: vector dependence: assumed ANTI dependence between b%e8%e8(0) (60:8) and a(i) (60:8)
+   remark #25439: unrolled with remainder by 2  
+LOOP END
+
+LOOP BEGIN at worker.f90(59,5)
+<Remainder>
+LOOP END
+
+    Report from: Code generation optimizations [cg]
+
+worker.f90(53,14):remark #34051: REGISTER ALLOCATION : [worker_module_mp_my_vector_add_pointer_] worker.f90:53
+
+    Hardware registers
+        Reserved     :    2[ rsp rip]
+        Available    :   39[ rax rdx rcx rbx rbp rsi rdi r8-r15 mm0-mm7 zmm0-zmm15]
+        Callee-save  :    6[ rbx rbp r12-r15]
+        Assigned     :   16[ rax rdx rcx rbx rbp rsi rdi r8-r11 r15 zmm0-zmm3]
+        
+    Routine temporaries
+        Total         :      48
+            Global    :      19
+            Local     :      29
+        Regenerable   :       0
+        Spilled       :       3
+        
+    Routine stack
+        Variables     :       0 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       0 [0.00e+00 ~ 0.0%]
+        Spills        :      16 bytes*
+            Reads     :       2 [1.96e+00 ~ 1.8%]
+            Writes    :       2 [1.96e+00 ~ 1.8%]
+    
+    Notes
+    
+        *Non-overlapping variables and spills may share stack space,
+         so the total stack size might be less than this.
+    
+
+===========================================================================
+
+Begin optimization report for: WORKER_MODULE::MY_VECTOR_ADD_POINTER_CONTIGUOUS
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (WORKER_MODULE::MY_VECTOR_ADD_POINTER_CONTIGUOUS) [7/7=100.0%] worker.f90(65,14)
+
+
+    Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
+
+
+LOOP BEGIN at worker.f90(71,5)
+   remark #15344: loop was not vectorized: vector dependence prevents vectorization
+   remark #15346: vector dependence: assumed FLOW dependence between a(i) (72:8) and b%10b%10b(0) (72:8)
+   remark #15346: vector dependence: assumed ANTI dependence between b%10b%10b(0) (72:8) and a(i) (72:8)
+   remark #25439: unrolled with remainder by 2  
+LOOP END
+
+LOOP BEGIN at worker.f90(71,5)
+<Remainder>
+LOOP END
+
+    Report from: Code generation optimizations [cg]
+
+worker.f90(65,14):remark #34051: REGISTER ALLOCATION : [worker_module_mp_my_vector_add_pointer_contiguous_] worker.f90:65
+
+    Hardware registers
+        Reserved     :    2[ rsp rip]
+        Available    :   39[ rax rdx rcx rbx rbp rsi rdi r8-r15 mm0-mm7 zmm0-zmm15]
+        Callee-save  :    6[ rbx rbp r12-r15]
+        Assigned     :   13[ rax rdx rcx rsi rdi r8-r11 zmm0-zmm3]
+        
+    Routine temporaries
+        Total         :      43
+            Global    :      17
+            Local     :      26
+        Regenerable   :       0
+        Spilled       :       0
+        
+    Routine stack
+        Variables     :       0 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       0 [0.00e+00 ~ 0.0%]
+        Spills        :       0 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       0 [0.00e+00 ~ 0.0%]
+    
+    Notes
+    
+        *Non-overlapping variables and spills may share stack space,
+         so the total stack size might be less than this.
+    
+
+===========================================================================
