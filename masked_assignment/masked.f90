@@ -21,6 +21,9 @@ program masked
   call where_all(a,b,c)
   write(*,*) c(10)
   c = 0.0
+  call where_sqrt(a,b,c)
+  write(*,*) c(10)
+  c = 0.0
   c(1000) = 1.0
   call do_counter_partial_sum(c,counter)
   call do_counter_count(c,counter)

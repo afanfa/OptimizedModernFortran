@@ -1,7 +1,7 @@
 CXX = ifort
 CXXFLAGS=
 CPUFLAGS = $(CXXFLAGS) -xhost
-OPTFLAGS = -qopt-report -qopt-report-file=$@.optrpt
+OPTFLAGS = -qopt-report=5 -qopt-report-file=$@.optrpt
 
 CPUOBJECTS = worker.o masked.o
 

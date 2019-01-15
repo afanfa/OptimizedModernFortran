@@ -13,6 +13,18 @@ contains
     
   end subroutine where_all
 
+  subroutine where_sqrt(a,b,c)
+    implicit none
+    real(real64), allocatable :: a(:), b(:), c(:)
+    
+    where(a >= b)
+       c = sqrt(a)
+    elsewhere
+       c = 0.0
+    end where
+    
+  end subroutine where_sqrt
+
   subroutine do_counter_partial_sum(c,counter)
     implicit none
     real(real64), allocatable :: c(:)
