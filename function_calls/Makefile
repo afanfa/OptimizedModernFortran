@@ -32,5 +32,5 @@ run-cpu: app-CPU
 	./app-CPU
 
 clean: 
-	rm -f $(CPUOBJECTS) $(MICOBJECTS) $(TARGET) *.optrpt
+	rm -f $(CPUOBJECTS) $(MICOBJECTS) $(TARGET) *.optrpt *.mod
 

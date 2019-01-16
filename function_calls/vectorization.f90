@@ -32,4 +32,6 @@ program vector_1
      c(i) = my_scalar_add_elemental(pi,tmp)
   end do
 
+  c = my_scalar_add_elemental(a(i),b(i))
+
 end program vector_1
