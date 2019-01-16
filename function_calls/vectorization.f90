@@ -5,29 +5,31 @@ program vector_1
 
   integer, parameter :: n = 1000000
   integer :: i,k = 1
-  real(real64),dimension(n) :: a, b, c
-  real(real64) :: tmp
+  real(real64),dimension(n) :: a, b, c, d
+  real(real64) :: tmp, pi
 
-  do i = 1, n
-     a(i) = 1.0/n
-     b(i) = 2.0
-  end do
-
-  do i = 1, n
-     b(i) = a(i) + b(i)
-  end do
-
-  tmp = 0.0
-  do i = 1, n - 1
-     tmp = tmp + a(i)
-  end do
+  d = (/ (i, i = 1, n ) /)
 
   do i = 1, n
      c(i) = my_scalar_add(a(i),b(i))
+  end do
+
+  do i = 1, n
+     c(i) = my_scalar_add_pure(a(i),b(i))
+  end do
+
+  do i = 1, n
+     c(i) = my_scalar_add_elemental(a(i),b(i))
   end do
 
   do concurrent (i=1:n)
-     c(i) = my_scalar_add(a(i),b(i))
+     c(i) = my_scalar_add_pure(a(i),b(i))
+  end do
+
+  pi = 3.1415_real64
+  tmp = 1.0
+  do i = 1, n
+     c(i) = my_scalar_add_elemental(pi,tmp)
   end do
 
 end program vector_1
