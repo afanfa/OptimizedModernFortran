@@ -3,7 +3,7 @@ CXXFLAGS= -qopenmp
 CPUFLAGS = $(CXXFLAGS) -xhost
 OPTFLAGS = -qopt-report=5 -qopt-report-file=$@.optrpt
 
-CPUOBJECTS = vectorization.o
+CPUOBJECTS = align.o
 
 TARGET=app-CPU
 FC=ifort
