@@ -1,9 +1,8 @@
 program mem_alignment
-  use worker_module
   use iso_fortran_env, only : real64
   implicit none
 
-  integer, parameter :: n = 100000
+  integer, parameter :: n = 10
   integer :: i,k = 1
   real(real64),dimension(n) :: a, b
   real(real64),allocatable :: a_a(:), a_b(:)
