@@ -10,7 +10,7 @@ CXX=ifort
 
 .SUFFIXES: .o .f90
 
-all: $(TARGET) instructions
+all: $(TARGET)
 
 %-CPU: $(CPUOBJECTS)
 	$(info )
@@ -22,12 +22,6 @@ all: $(TARGET) instructions
 	$(info Compiling a CPU object file:)
 	$(CXX) -c $(CPUFLAGS) $(OPTFLAGS) -o "$@" "$<"
 
-instructions: 
-	$(info )
-	$(info TO EXECUTE THE APPLICATION: )
-	$(info "make run-cpu" to run the application on the host CPU)
-	$(info )
-
 clean: 
-	rm -f $(CPUOBJECTS) $(TARGET) *.optrpt
+	rm -f $(CPUOBJECTS) $(TARGET) *.optrpt *.mod
 

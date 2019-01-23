@@ -10,7 +10,7 @@ FC=ifort
 
 .SUFFIXES: .o .f90
 
-all: $(TARGET) instructions
+all: $(TARGET)
 
 %-CPU: $(CPUOBJECTS)
 	$(info )
@@ -21,12 +21,6 @@ all: $(TARGET) instructions
 	$(info )
 	$(info Compiling a CPU object file:)
 	$(FC) -c $(CPUFLAGS) $(OPTFLAGS) -o "$@" "$<"
-
-instructions: 
-	$(info )
-	$(info TO EXECUTE THE APPLICATION: )
-	$(info "make run-cpu" to run the application on the host CPU)
-	$(info )
 
 run-cpu: app-CPU
 	./app-CPU
