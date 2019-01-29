@@ -22,12 +22,12 @@ program vector_1
   !b_e = b
 
   do i = 1, n
-     call my_matrix_add(a(:,:,i),b(i,:,:))
+     !call my_matrix_add(a(:,:,i),b(i,:,:))
      !call my_matrix_add_intent(a(:,:,i),b(i,:,:))
      !call my_matrix_add_explicit(a(:,:,i),b(i,:,:),n)
      !call my_matrix_add_explicit_intent(a(:,:,i),b(i,:,:),n)
      !call my_matrix_add(a(:,:,i),b(:,:,i))
-     !call my_matrix_add_allocatable(a(:,:,i),b(i,:,:))
+     call my_matrix_add_allocatable(a(:,:,i),b(i,:,:))
   end do
 
 end program vector_1

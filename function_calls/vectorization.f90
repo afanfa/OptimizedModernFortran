@@ -22,10 +22,6 @@ program vector_1
      c(i) = my_scalar_add_elemental(a(i),b(i))
   end do
 
-  do concurrent (i=1:n)
-     c(i) = my_scalar_add_pure(a(i),b(i))
-  end do
-
   pi = 3.1415_real64
   tmp = 1.0
   

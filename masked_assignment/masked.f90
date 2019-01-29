@@ -17,11 +17,11 @@ program masked
      a(i) = i + 2.0
   end do
 
-  ! call where_all(a,b,c)
-  ! write(*,*) c(10)
+   call where_all(a,b,c)
+   write(*,*) c(10)
 
-  call if_then_all(a,b,c)
-  write(*,*) c(10)
+  !call if_then_all(a,b,c)
+  !write(*,*) c(10)
 
   ! c = 0.0
   !call where_sqrt(a,b,c)

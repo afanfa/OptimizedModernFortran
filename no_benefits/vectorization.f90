@@ -19,7 +19,6 @@ program no_benefits
      c(i) = i
   end do
 
-!dir$ novector
  do i = 1, n
     c(i) = c(i) + a(i) * b(i) * 2*rec
  end do
