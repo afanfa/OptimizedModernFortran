@@ -19,6 +19,10 @@ program vector_1
   end do
 
   do i = 1, n
+     call my_scalar_add_elemental_value(c(i), a(i), b(i))
+  end do
+
+  do i = 1, n
      c(i) = my_scalar_add_elemental(a(i),b(i))
   end do
 

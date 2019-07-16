@@ -20,6 +20,15 @@ contains
 
   end function my_scalar_add_pure
 
+  elemental subroutine my_scalar_add_elemental_value(res, x1, x2)
+    implicit none
+    real(real64),value,intent(in) :: x1, x2
+    real(real64),intent(out) :: res
+
+    res = x1 + x2
+
+  end subroutine my_scalar_add_elemental_value
+
   elemental function my_scalar_add_elemental(x1, x2) result(res)
     implicit none
     real(real64),intent(in) :: x1, x2
