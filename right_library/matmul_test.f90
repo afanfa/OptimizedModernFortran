@@ -2,7 +2,7 @@ program matmul_test
   use iso_fortran_env, only : real64
   implicit none
 
-  integer, parameter :: n = 10000
+  integer, parameter :: n = 3000
   real(real64),allocatable :: a(:,:),b(:,:),c(:,:)
   integer :: i,j
 
