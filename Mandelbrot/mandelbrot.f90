@@ -4,7 +4,7 @@ program mandelbrot
   real :: x, y
   complex :: z, c
   real, parameter :: x_max=0.5, x_min = -2.0, y_max = 1.25, y_min = -1.25
-  integer, parameter :: m = 1000, n = 100000, max_iter = 100000
+  integer, parameter :: m = 1000, n = 50000, max_iter = 50000
   real, dimension(m,n) :: final_matrix
   integer :: i, j, iter
   logical :: diverge
@@ -32,8 +32,6 @@ program mandelbrot
      end do
   end do
 
-  OPEN(1, FILE='mandel.txt', FORM='unformatted')
-
-  write(1) final_matrix
+  write(*,*) final_matrix(100,100)
   
 end program mandelbrot
