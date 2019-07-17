@@ -15,17 +15,24 @@ program mem_alignment
 
   rec = 1/n
 
-  !do j=1,iter
-  !   do i = 1, n
-  !      a(i) = 1.0 - 3.1415 + 2*(n - i + 1.0_real64) * rec
-  !      b(i) = 2.0 + 6.283 + 5*(n - i + 1.0_real64)
-  !   end do
-  !end do
+  do j=1,iter
+    do i = 1, n
+       a(i) = 1.0 - 3.1415 + 2*(n - i + 1.0_real64) * rec
+       b(i) = 2.0 + 6.283 + 5*(n - i + 1.0_real64)
+    end do
+  end do
 
   do j = 1,iter
      do i = 1, n
         a_a(i) = 1.0 - 3.1415 + 2*( n - i + 1.0_real64) * rec
         a_b(i) = 2.0 + 6.283 + 5*(n - i + 1.0_real64)
+     end do
+  end do
+
+  do j = 1,iter
+     do i = 1, n-1
+        a(i) = 1.0 - 3.1415 + 2*( n - i + 1.0_real64) * rec
+        a(i) = 2.0 + 6.283 + 5*(n - i + 1.0_real64)
      end do
   end do
 
