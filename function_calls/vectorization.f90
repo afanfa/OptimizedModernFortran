@@ -35,7 +35,7 @@ program vector_1
 
   c = my_scalar_add_elemental(a(i),b(i))
 
-!dir$ ivdep
+!DIR$ FORCEINLINE
   do i = 1, n
      c(i) = nice_function_pure(pi,tmp)
   end do
