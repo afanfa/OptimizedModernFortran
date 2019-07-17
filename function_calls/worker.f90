@@ -11,6 +11,16 @@ contains
 
   end function my_scalar_add
 
+  function my_scalar_add_omp(x1, x2) result(res)
+    !$omp declare simd(my_scalar_add_omp)
+    implicit none
+    real(real64),intent(in) :: x1, x2
+    real(real64) :: res
+
+    res = x1 + x2
+
+  end function my_scalar_add_omp
+
   pure function my_scalar_add_pure(x1, x2) result(res)
     implicit none
     real(real64),intent(in) :: x1, x2

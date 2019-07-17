@@ -35,8 +35,13 @@ program vector_1
 
   c = my_scalar_add_elemental(a(i),b(i))
 
+!dir$ ivdep
   do i = 1, n
      c(i) = nice_function_pure(pi,tmp)
+  end do
+
+  do i = 1, n
+     c(i) = my_scalar_add_omp(pi,tmp)
   end do
 
 contains
@@ -45,9 +50,9 @@ contains
     implicit none
     real(real64),intent(in) :: x1, x2
     real(real64) :: res
-
+    
     res = x1 + x2
-
+    
   end function nice_function_pure
 
 end program vector_1
