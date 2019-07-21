@@ -2,7 +2,7 @@ program no_benefits
   use iso_fortran_env, only : real64
   implicit none
 
-  integer, parameter :: n = 1990000!999000004
+  integer, parameter :: n = 999000004
   integer :: i,j
   real(real64),allocatable:: a(:), b(:), c(:)
   real(real64) :: rec
@@ -19,6 +19,7 @@ program no_benefits
      c(i) = i
   end do
 
+!!dir$ novector
  do i = 1, n
     c(i) = c(i) + a(i) * b(i) * 2*rec
  end do
