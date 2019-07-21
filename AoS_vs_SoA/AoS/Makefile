@@ -3,7 +3,7 @@ CXXFLAGS=
 CPUFLAGS = $(CXXFLAGS) -xhost
 OPTFLAGS = -qopt-report=5 -qopt-report-file=$@.optrpt
 
-CPUOBJECTS = SoA.o
+CPUOBJECTS = AoS.o
 
 TARGET=app-CPU
 FC=ifort

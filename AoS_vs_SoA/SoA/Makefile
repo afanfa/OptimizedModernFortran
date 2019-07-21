@@ -22,9 +22,6 @@ all: $(TARGET)
 	$(info Compiling a CPU object file:)
 	$(FC) -c $(CPUFLAGS) $(OPTFLAGS) -o "$@" "$<"
 
-run-cpu: app-CPU
-	./app-CPU
-
-clean: 
+clean:
 	rm -f $(CPUOBJECTS) $(MICOBJECTS) $(TARGET) *.optrpt *.mod
 
