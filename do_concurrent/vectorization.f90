@@ -3,7 +3,7 @@ program vector_dep
   use iso_fortran_env, only : real32
   implicit none
 
-  integer, parameter :: n = 10000000
+  integer, parameter :: n = 20000000
   integer :: i,k=1
   real(real32),dimension(n) :: a
   real(real32) :: c

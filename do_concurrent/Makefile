@@ -1,6 +1,6 @@
 CXX = ifort
 CXXFLAGS= -qopenmp
-CPUFLAGS = $(CXXFLAGS) -xhost
+CPUFLAGS = $(CXXFLAGS) -xhost -parallel
 OPTFLAGS = -qopt-report=5 -qopt-report-file=$@.optrpt
 
 CPUOBJECTS = worker.o vectorization.o
