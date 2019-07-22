@@ -1,0 +1,1 @@
+perf stat -e cache-misses,dTLB-load-misses,minor-faults,iTLB-load-misses,page-faults /glade/u/home/elfanfa/VectorizationTAG/OptimizedModernFortran/mem_align/app-CPU
