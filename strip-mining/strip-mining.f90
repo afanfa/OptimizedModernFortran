@@ -23,8 +23,8 @@ program strip_mining
 
   do jj = 1, m, tile
      do i = 1, n
-        do j = jj, jj + tile
-           c(i) = c(i) + a(i) * b(jj) * 2*rec
+        do j = jj, jj + (tile - 1)
+           c(i) = c(i) + a(i) * b(j) * 2*rec
         end do
      end do
   end do
