@@ -12,8 +12,6 @@ program mem_alignment
   real(real64) :: time_Start, time_end
   integer :: j, iter=10000000, ierr
 
-  allocate(a_a(n),a_b(n))
-
   rec = 1/n
   c = 0.0
 
@@ -31,6 +29,7 @@ program mem_alignment
 
   write(*,*) a(10), 'TIme:',time_end - time_start
 
+  ! allocate(a_a(n),a_b(n))
   ! c = 0.0
 
   ! call cpu_time(time_start)
