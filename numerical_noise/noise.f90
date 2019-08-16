@@ -1,5 +1,5 @@
 program noise
-  use iso_fortran_env, only : real32
+  use iso_fortran_env, only : real32, real64
   implicit none
 
   integer, parameter :: n = 100000
@@ -14,7 +14,7 @@ program noise
      b(i) = 1/(1+10000*i)
   end do
 
-  redux = 0.d0
+  redux = 0.0
 !dir$ novector
   do i = 1, n
      redux = redux + a(i) + b(i)
