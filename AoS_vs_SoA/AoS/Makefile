@@ -1,12 +1,18 @@
-CXX = ifort
-CXXFLAGS=
-CPUFLAGS = $(CXXFLAGS) -xhost
-OPTFLAGS = -qopt-report=5 -qopt-report-file=$@.optrpt
+ifeq ($(COMPILER),gfortran)
+  FC= gfortran
+  FCFLAGS = -fopenmp
+  CPUFLAGS = $(FCFLAGS) -O3
+  OPTFLAGS = -fopt-info-missed=missed.all
+else
+  FC= ifort
+  FCFLAGS= -qopenmp
+  CPUFLAGS = $(FCFLAGS) -xhost
+  OPTFLAGS = -qopt-report=5 -qopt-report-file=$@.optrpt
+endif
 
 CPUOBJECTS = AoS.o
 
 TARGET=app-CPU
-FC=ifort
 
 .SUFFIXES: .o .f90
 

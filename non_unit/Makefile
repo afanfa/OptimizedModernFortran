@@ -1,12 +1,18 @@
-CXX = ifort
-CXXFLAGS= -qopenmp
-CPUFLAGS = $(CXXFLAGS) -xhost
-OPTFLAGS = -qopt-report=5 -qopt-report-file=$@.optrpt
+ifeq ($(COMPILER),gfortran)
+  FC= gfortran
+  FCFLAGS = -fopenmp
+  CPUFLAGS = $(FCFLAGS) -O3
+  OPTFLAGS = -fopt-info-missed=missed.all
+else
+  FC= ifort
+  FCFLAGS= -qopenmp
+  CPUFLAGS = $(FCFLAGS) -xhost
+  OPTFLAGS = -qopt-report=5 -qopt-report-file=$@.optrpt
+endif
 
 CPUOBJECTS = vectorization.o
 
 TARGET=app-CPU
-FC=ifort
 
 .SUFFIXES: .o .f90
 
@@ -21,9 +27,6 @@ all: $(TARGET)
 	$(info )
 	$(info Compiling a CPU object file:)
 	$(FC) -c $(CPUFLAGS) $(OPTFLAGS) -o "$@" "$<"
-
-run-cpu: app-CPU
-	./app-CPU
 
 clean: 
 	rm -f $(CPUOBJECTS) $(TARGET) *.optrpt *.mod

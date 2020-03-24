@@ -1,12 +1,18 @@
-CXX = ifort
-CXXFLAGS=
-CPUFLAGS = $(CXXFLAGS) -xhost
-OPTFLAGS = -qopt-report=5 -qopt-report-file=$@.optrpt
+ifeq ($(COMPILER),gfortran)
+  FC= gfortran
+  FCFLAGS = -fopenmp
+  CPUFLAGS = $(FCFLAGS) -O3
+  OPTFLAGS = -fopt-info-missed=missed.all
+else
+  FC= ifort
+  FCFLAGS= -qopenmp
+  CPUFLAGS = $(FCFLAGS) -xhost
+  OPTFLAGS = -qopt-report=5 -qopt-report-file=$@.optrpt
+endif
 
 CPUOBJECTS = counting.o
 
 TARGET=app-CPU
-CXX=ifort
 
 .SUFFIXES: .o .f90
 
@@ -15,12 +21,12 @@ all: $(TARGET)
 %-CPU: $(CPUOBJECTS)
 	$(info )
 	$(info Linking the CPU executable:)
-	$(CXX) $(CPUFLAGS) -o $@ $(CPUOBJECTS)
+	$(FC) $(CPUFLAGS) -o $@ $(CPUOBJECTS)
 
 .f90.o:
 	$(info )
 	$(info Compiling a CPU object file:)
-	$(CXX) -c $(CPUFLAGS) $(OPTFLAGS) -o "$@" "$<"
+	$(FC) -c $(CPUFLAGS) $(OPTFLAGS) -o "$@" "$<"
 
 clean: 
 	rm -f $(CPUOBJECTS) $(TARGET) *.optrpt *.mod

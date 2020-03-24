@@ -1,13 +1,19 @@
-CXX = ifort
-CXXFLAGS= -qopenmp -align
-CPUFLAGS = $(CXXFLAGS) -xhost
-OPTFLAGS = -qopt-report=5 -qopt-report-file=$@.optrpt
+ifeq ($(COMPILER),gfortran)
+  FC= gfortran
+  FCFLAGS = -fopenmp
+  CPUFLAGS = $(FCFLAGS) -O3
+  OPTFLAGS = -fopt-info-missed=missed.all
+else
+  FC= ifort
+  FCFLAGS= -qopenmp
+  CPUFLAGS = $(FCFLAGS) -xhost
+  OPTFLAGS = -qopt-report=5 -qopt-report-file=$@.optrpt
+endif
 
 SM-OBJECTS = strip-mining.o
 NOBEN-OBJECTS = no_benefits.o
 
 TARGET= no_benefits strip-mining
-FC=ifort
 
 .SUFFIXES: .o .f90
 
