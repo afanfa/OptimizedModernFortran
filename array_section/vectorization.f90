@@ -3,7 +3,7 @@ program vector_1
   use iso_fortran_env, only : real64
   implicit none
 
-  integer, parameter :: n = 1000, m = 100
+  integer, parameter :: n = 500, m = 100
   integer :: i,j,k
   real(real64),allocatable  :: a(:,:,:),b(:,:,:) ! deferred-shape arrays
 
@@ -22,12 +22,12 @@ program vector_1
   !b_e = b
 
   do i = 1, n
-     !call my_matrix_add(a(:,:,i),b(i,:,:))
+     call my_matrix_add(a(:,:,i),b(i,:,:))
      !call my_matrix_add_intent(a(:,:,i),b(i,:,:))
      !call my_matrix_add_explicit(a(:,:,i),b(i,:,:),n)
      !call my_matrix_add_explicit_intent(a(:,:,i),b(i,:,:),n)
      !call my_matrix_add(a(:,:,i),b(:,:,i))
-     call my_matrix_add_allocatable(a(:,:,i),b(i,:,:))
+     !call my_matrix_add_allocatable(a(:,:,i),b(i,:,:))
   end do
 
 end program vector_1
